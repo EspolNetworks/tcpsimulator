@@ -31,4 +31,3 @@ bun run client.ts [--port <port_number>] [--clientPort <port_number>] --file <fi
 - Funciona dentro de una sola misma máquina, aunque se podría modificar para que se ejecute en dispositivos distintos.
 - No se han añadido tests al funcionamiento del checksum.
 
-## Versión en `Python`
