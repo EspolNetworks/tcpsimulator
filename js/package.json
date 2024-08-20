@@ -1,0 +1,13 @@
+{
+  "name": "internet-simulator",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "macaddress": "^0.5.3"
+  }
+}
