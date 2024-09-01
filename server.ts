@@ -5,6 +5,7 @@ import type { tcpPacket } from "./tcp.ts";
 import type { byte } from "./lib/bytes.ts";
 import { runRandomly } from "./lib/random.ts";
 import { checkPacket } from "./lib/checksum.ts";
+import { mkdir } from "node:fs/promises";
 
 const defaultPort = 8080;
 let port: number;
@@ -54,14 +55,15 @@ const server = Bun.listen({
             packets = [];
             socket.write("send");
         },
-        close(socket) {
+        async close(socket) {
             const sortedPackets = packets.sort(
                 (packetA: tcpPacket, packetB: tcpPacket) =>
                     packetA.tcpHeader.sequenceNumber -
                     packetB.tcpHeader.sequenceNumber
             );
 
-            const file = Bun.file("./file.txt");
+            await mkdir("store", { recursive: true });
+            const file = Bun.file("./store/file.txt");
             const writer = file.writer();
             const decoder = new TextDecoder();
             for (const packet of sortedPackets) {
@@ -72,8 +74,6 @@ const server = Bun.listen({
                 writer.flush();
             }
             writer.end();
-
-            console.log(`Good bye ${socket}`);
         },
     },
 });

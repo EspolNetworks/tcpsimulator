@@ -102,6 +102,9 @@ const getRandomKey = (collection: any) => {
 
 // data: received/index
 
+let sentPackages = 0;
+let receivedPackages = 0;
+
 await Bun.connect({
     hostname: "localhost",
     port: serverPort,
@@ -114,6 +117,7 @@ await Bun.connect({
                 const index = parseInt(messageParts[1]);
                 packetsIndices.delete(index);
                 remainingPacketsToSend -= 1;
+                receivedPackages += 1;
             }
 
             if (remainingPacketsToSend === 0) {
@@ -130,9 +134,15 @@ await Bun.connect({
             const binPacket = Buffer.from(JSON.stringify(packet));
 
             socket.write(binPacket);
+            sentPackages += 1;
         },
         close(socket) {
-            console.log("Good bye!");
+            console.log(
+                `Sent packages: ${sentPackages}\nReceived packages: ${receivedPackages}\nPercentage packets lost/damaged: ${(
+                    (receivedPackages / sentPackages) *
+                    100
+                ).toFixed(2)} %`
+            );
         },
     },
 });
