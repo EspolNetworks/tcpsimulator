@@ -124,7 +124,7 @@ await Bun.connect({
             const randomIndex = getRandomKey(packetsIndices);
             let packet = builtPackets[randomIndex];
 
-            if (runRandomly(25)) {
+            if (runRandomly(10)) {
                 packet = alterPacket(packet);
             }
             const binPacket = Buffer.from(JSON.stringify(packet));
