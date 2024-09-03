@@ -1,0 +1,10 @@
+Execution Time: 6.102151192 seconds, Output: Percentage packets lost/damaged: 81.51 %
+Execution Time: 5.297530904 seconds, Output: Percentage packets lost/damaged: 82.71 %
+Execution Time: 5.288885356 seconds, Output: Percentage packets lost/damaged: 82.28 %
+Execution Time: 4.647612107 seconds, Output: Percentage packets lost/damaged: 79.56 %
+Execution Time: 5.906833779 seconds, Output: Percentage packets lost/damaged: 79.36 %
+Execution Time: 5.535161692 seconds, Output: Percentage packets lost/damaged: 80.63 %
+Execution Time: 4.951322201 seconds, Output: Percentage packets lost/damaged: 81.55 %
+Execution Time: 6.236470933 seconds, Output: Percentage packets lost/damaged: 80.92 %
+Execution Time: 4.650203735 seconds, Output: Percentage packets lost/damaged: 79.69 %
+Execution Time: 4.480665701 seconds, Output: Percentage packets lost/damaged: 81.51 %
