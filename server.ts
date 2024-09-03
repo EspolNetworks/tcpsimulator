@@ -1,11 +1,11 @@
 // js/
 
-import { parseArgs } from "util";  // Importa la función parseArgs para analizar los argumentos de la línea de comandos
-import type { tcpPacket } from "./tcp.ts";  // Importa el tipo tcpPacket desde el módulo tcp.ts
-import type { byte } from "./lib/bytes.ts";  // Importa el tipo byte desde el módulo bytes.ts
-import { runRandomly } from "./lib/random.ts";  // Importa una función para ejecutar una acción de manera aleatoria
-import { checkPacket } from "./lib/checksum.ts";  // Importa la función checkPacket para verificar el checksum de un paquete
-import { mkdir } from "node:fs/promises";  // Importa la función mkdir de fs/promises para crear directorios de manera asíncrona
+import { parseArgs } from "util"; // Importa la función parseArgs para analizar los argumentos de la línea de comandos
+import type { tcpPacket } from "./tcp.ts"; // Importa el tipo tcpPacket desde el módulo tcp.ts
+import type { byte } from "./lib/bytes.ts"; // Importa el tipo byte desde el módulo bytes.ts
+import { runRandomly } from "./lib/random.ts"; // Importa una función para ejecutar una acción de manera aleatoria
+import { checkPacket } from "./lib/checksum.ts"; // Importa la función checkPacket para verificar el checksum de un paquete
+import { mkdir } from "node:fs/promises"; // Importa la función mkdir de fs/promises para crear directorios de manera asíncrona
 
 const defaultPort = 8080;
 let port: number;
@@ -13,14 +13,14 @@ let port: number;
 try {
     // Analiza los argumentos de la línea de comandos para obtener el puerto
     const { values } = parseArgs({
-        args: Bun.argv,  // Obtiene los argumentos pasados al comando
+        args: Bun.argv, // Obtiene los argumentos pasados al comando
         options: {
             port: {
-                type: "string", 
+                type: "string",
             },
         },
-        strict: true,  // Requiere que los argumentos sean estrictamente como se definen
-        allowPositionals: true,  // Permite argumentos posicionales
+        strict: true, // Requiere que los argumentos sean estrictamente como se definen
+        allowPositionals: true, // Permite argumentos posicionales
     });
 
     // Asigna el puerto a la variable `port`, utilizando el puerto predeterminado si no se especifica
@@ -36,8 +36,8 @@ try {
 let packets: tcpPacket[] = [];
 
 const server = Bun.listen({
-    hostname: "localhost",  
-    port,  
+    hostname: "localhost",
+    port,
     socket: {
         data(socket, data) {
             // Simula una pérdida de paquetes al responder "send" aleatoriamente
@@ -62,7 +62,6 @@ const server = Bun.listen({
                 socket.write("send");
             }
         },
-n
         open(socket) {
             packets = [];
             // Solicita el envío de datos al cliente
@@ -82,19 +81,19 @@ n
 
             // Crea o abre el archivo donde se almacenarán los datos recibidos
             const file = Bun.file("./store/file.txt");
-            const writer = file.writer();  
-            const decoder = new TextDecoder();  // Crea un decodificador para convertir los bytes en texto
+            const writer = file.writer();
+            const decoder = new TextDecoder(); // Crea un decodificador para convertir los bytes en texto
 
             // Itera sobre los paquetes ordenados y escribe el payload en el archivo
             for (const packet of sortedPackets) {
                 const data = packet.ipv4Packet.ethernetFrame.payload;
-                const text = decoder.decode(byte);  o
-                writer.write(text);  
-                writer.flush();  
+                const text = decoder.decode(byte);
+                writer.write(text);
+                writer.flush();
             }
-            writer.end();  
+            writer.end();
         },
     },
 });
 
-console.log(`Socket listening in ${server.port}`); 
+console.log(`Socket listening in ${server.port}`);
