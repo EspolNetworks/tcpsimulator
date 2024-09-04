@@ -41,7 +41,7 @@ const server = Bun.listen({
     socket: {
         data(socket, data) {
             // Simula una pérdida de paquetes al responder "send" aleatoriamente
-            if (runRandomly(3)) {
+            if (runRandomly(10)) {
                 socket.write("send");
                 return;
             }
