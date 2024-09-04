@@ -87,6 +87,7 @@ const server = Bun.listen({
             // Itera sobre los paquetes ordenados y escribe el payload en el archivo
             for (const packet of sortedPackets) {
                 const data = packet.ipv4Packet.ethernetFrame.payload;
+                const byte: byte = new Uint8Array(Object.values(data));
                 const text = decoder.decode(byte);
                 writer.write(text);
                 writer.flush();
